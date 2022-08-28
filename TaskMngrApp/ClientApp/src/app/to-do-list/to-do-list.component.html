@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let task of pendingTasks">
+        <tr *ngFor="let task of pendingTasks" (click)="changeStatus(task)">
           <td>{{ task.id }}</td>
           <td>{{ task.description }}</td>
         </tr>
@@ -31,7 +31,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let task of completedTasks">
+        <tr *ngFor="let task of completedTasks" (click)="changeStatus(task)">
           <td>{{ task.id }}</td>
           <td>{{ task.description }}</td>
         </tr>
