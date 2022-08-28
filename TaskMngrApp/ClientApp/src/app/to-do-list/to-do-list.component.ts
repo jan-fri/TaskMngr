@@ -43,9 +43,11 @@ export class ToDoListComponent implements OnInit {
   changeStatus(task: Task) {
     if (task.isCompleted) {
       this.completedTasks = this.completedTasks.filter(x => x.id !== task.id);
+      task.isCompleted = false;
       this.pendingTasks.push(task);
     } else {
       this.pendingTasks = this.pendingTasks.filter(x => x.id !== task.id);
+      task.isCompleted = true;
       this.completedTasks.push(task);
     }
   }
