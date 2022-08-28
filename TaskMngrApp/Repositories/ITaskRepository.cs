@@ -3,6 +3,6 @@
     public interface ITaskRepository
     {
         IEnumerable<Models.Task> GetAllTasks();
-        void AddTask(Models.Task task);
+        Models.Task AddTask(Models.Task task);
     }
 }

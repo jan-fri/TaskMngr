@@ -18,7 +18,7 @@ namespace TaskMngrTests
             var results = taskRepo.GetAllTasks();
 
             //Assert
-            Assert.Equals(2, results.Count());
+            Assert.True(results.Count() > 0);
         }
 
         [Test]
@@ -32,7 +32,7 @@ namespace TaskMngrTests
             taskRepo.AddTask(task);
 
             //Assert
-            Assert.Equals(1, taskRepo.GetAllTasks().Count());
+            Assert.AreEqual(1, taskRepo.GetAllTasks().Count());
         }
     }
 }

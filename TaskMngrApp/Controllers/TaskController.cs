@@ -1,12 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TaskMngrApp.Repositories;
+using TaskMngrApp.Services;
 
 namespace TaskMngrApp.Controllers
 {
-    public class TaskController : Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class TaskController : ControllerBase
     {
-        public IActionResult Index()
+        [HttpPost]
+        [Route("AddTask")]
+        public IActionResult AddTask(string taskDescription)
         {
-            return View();
+            var taskRepository = new TaskRepository();
+            var taskService = new TaskService(taskRepository);
+            var newTask = taskService.AddTask(taskDescription);
+
+            return Ok(newTask);
         }
     }
 }

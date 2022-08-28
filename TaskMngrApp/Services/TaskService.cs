@@ -4,14 +4,19 @@ namespace TaskMngrApp.Services
 {
     public class TaskService : ITaskService
     {
-        public void AddTask(string newTaskDescription)
+        private ITaskRepository _taskRepository;
+
+        public TaskService(ITaskRepository taskRepository)
         {
-            throw new NotImplementedException();
+            _taskRepository = taskRepository;
         }
 
-        public List<Task> GetAllTasks()
+        public Models.Task AddTask(string newTaskDescription)
         {
-            throw new NotImplementedException();
+            var allTasks = _taskRepository.GetAllTasks();
+            var lastTaskId = allTasks.LastOrDefault()?.Id ?? 0;
+            var newTask = new Models.Task { Id = lastTaskId + 1, Description = newTaskDescription, IsCompleted = false };
+            return _taskRepository.AddTask(newTask);
         }
     }
 }

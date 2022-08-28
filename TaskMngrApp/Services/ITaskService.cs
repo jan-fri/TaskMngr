@@ -2,7 +2,6 @@
 {
     public interface ITaskService
     {
-        void AddTask(string newTaskDescription);
-        List<Task> GetAllTasks();
+        Models.Task AddTask(string newTaskDescription);
     }
 }

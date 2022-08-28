@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Task } from '../../models/task.model';
+import { HttpClient } from '@angular/common/http';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-to-do-list',
@@ -13,7 +15,7 @@ export class ToDoListComponent implements OnInit {
   completedTasks: Array<Task> = [];
   addTaskForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
 
   ngOnInit(): void {
     this.addTaskForm = this.formBuilder.group({
@@ -22,10 +24,19 @@ export class ToDoListComponent implements OnInit {
   }
 
   addTask() {
-    const task = new Task(this.addTaskForm.get('newTask')?.value, false);
-    this.pendingTasks.push(task);
-    this.addTaskForm.patchValue({
-      newTask: ''
-    });
+    const newDescription = this.addTaskForm.get('newTask')?.value;
+    this.saveTask(newDescription);
+  }
+
+  saveTask(taskDescription: string) {
+    this.http.post<Task>(this.baseUrl + 'task/AddTask?taskDescription=' + taskDescription, null)
+      .pipe(take(1))
+      .subscribe(result => {
+        const task = new Task(result.id, taskDescription, false);
+        this.pendingTasks.push(task);
+        this.addTaskForm.patchValue({
+          newTask: ''
+        });
+      })
   }
 }
