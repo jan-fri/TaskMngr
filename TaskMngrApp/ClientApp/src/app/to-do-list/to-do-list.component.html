@@ -1,3 +1,8 @@
+<form class="new-task" [formGroup]="addTaskForm" (ngSubmit)="addTask()">
+  <input class="new-task__input" formControlName="newTask" type="text" placeholder="task description" />
+  <button class="btn-primary">Add New Task</button>
+</form>
+
 <div class="d-flex">
   <div class="pending">
     <h2>Pending Tasks</h2>

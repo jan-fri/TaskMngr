@@ -25,3 +25,17 @@ tr {
   margin-right: 1rem;
   padding-right: 1rem;
 }
+
+
+.new-task {
+  margin: 1rem 0 1rem 0;
+}
+
+.new-task__input {
+  width: 22rem;
+  height: 2rem;
+}
+
+button {
+  margin-left: 1rem;
+}

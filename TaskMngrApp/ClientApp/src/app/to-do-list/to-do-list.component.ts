@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Task } from '../../models/task.model';
 
 @Component({
@@ -10,19 +11,21 @@ export class ToDoListComponent implements OnInit {
   tasks: Array<Task> = [];
   pendingTasks: Array<Task> = [];
   completedTasks: Array<Task> = [];
+  addTaskForm!: FormGroup;
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.populateTasks();
+    this.addTaskForm = this.formBuilder.group({
+      newTask: ['']
+    });
   }
 
-  populateTasks() {
-    this.tasks = [{ id: 1, isCompleted: false, description: 'task1' },
-    { id: 2, isCompleted: false, description: 'task2' },
-    { id: 3, isCompleted: true, description: 'task3' }];
-
-    this.pendingTasks = this.tasks.filter(x => x.isCompleted === false);
-    this.completedTasks = this.tasks.filter(x => x.isCompleted === true);
+  addTask() {
+    const task = new Task(this.addTaskForm.get('newTask')?.value, false);
+    this.pendingTasks.push(task);
+    this.addTaskForm.patchValue({
+      newTask: ''
+    });
   }
 }
