@@ -1,0 +1,27 @@
+table {
+  background-color: #fd9;
+}
+
+tbody {
+  background-color: #fff;
+  overflow: auto;
+}
+
+th {
+  padding-right: 1rem;
+}
+
+td {
+  padding: 3px 10px;
+  text-align: center;
+}
+
+tr {
+  cursor: pointer;
+}
+
+.pending {
+  border-right: 0.1rem double;
+  margin-right: 1rem;
+  padding-right: 1rem;
+}

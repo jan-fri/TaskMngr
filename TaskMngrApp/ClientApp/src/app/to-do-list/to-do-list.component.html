@@ -1,0 +1,36 @@
+<div class="d-flex">
+  <div class="pending">
+    <h2>Pending Tasks</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Task ID</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of pendingTasks">
+          <td>{{ task.id }}</td>
+          <td>{{ task.description }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h2>Completed Tasks</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Task ID</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of completedTasks">
+          <td>{{ task.id }}</td>
+          <td>{{ task.description }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
